@@ -1,0 +1,9 @@
+services:
+  app:
+    build: .
+    container_name: test_app
+    ports:
+      - 5000:5444
+    command: [ "python", "test_app.py" ]
+    volumes:
+      - .:/streamer_api

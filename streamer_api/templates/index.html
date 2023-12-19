@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>YouTube Audio Player</title>
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+
+</head>
+<body>
+    <h1>YouTube Audio Player</h1>
+
+     <audio id="audioPlayer" controls>
+        <source id="audioSource" type="audio/mpeg">
+        Your browser does not support the audio element.
+        {{ audio_file }}
+    </audio>
+
+    <button id="playButton">Play</button>
+    <button id="pauseButton">Pause</button>
+    <button id="stopButton">Stop</button>
+
+    <script>
+        const audioPlayer = document.getElementById("audioPlayer");
+        const audioSource = document.getElementById("audioSource");
+        const playButton = document.getElementById("playButton");
+        const pauseButton = document.getElementById("pauseButton");
+        const stopButton = document.getElementById("stopButton");
+
+        // Provide your buffered audio data as a Base64-encoded string
+        const audioData = "{{audio_file}}";
+
+        // Set the audio source
+        audioSource.src = `data:audio/mpeg;base64,${audioData}`;
+
+        // Load the audio
+        audioPlayer.load();
+
+        // Play audio
+        playButton.addEventListener("click", () => {
+            audioPlayer.play();
+        });
+
+        // Pause audio
+        pauseButton.addEventListener("click", () => {
+            audioPlayer.pause();
+        });
+
+        // Stop and reset audio
+        stopButton.addEventListener("click", () => {
+            audioPlayer.pause();
+            audioPlayer.currentTime = 0;
+        });
+    </script>
+</body>
+</html>
